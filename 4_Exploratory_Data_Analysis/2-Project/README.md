@@ -176,7 +176,6 @@ dev.off()
 ```
 ### Question 3
 Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
-
 ![Plot 3](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot3.png)
 ```R
 # Subset NEI - Baltimore
@@ -199,4 +198,47 @@ dev.copy(png,file = "./pics/plot3.png", width=504, height=504)
 # clean driver graphics
 dev.off()
 ```
+### Question 4
+Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?
+![Plot 4](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot4.png)
+```R
+# Names Variables in table sscT & neiT 
+# ssCT -> SCC.Level.One, SCC.Level.Four, SCC
+# neiT ->  SCC
+names(ssCT)
+names(neiT)
 
+# Subset coal combustion 
+combuSsc <- grepl("comb", sscT[, SCC.Level.One], ignore.case=TRUE) # Filter 1 Comb SCC.Level.One
+coalSsc <- grepl("coal", sscT[, SCC.Level.Four], ignore.case=TRUE) # Filter 2 coal SCC.Level.Four
+combuTemp <- sscT[combuSsc & coalSsc, SCC]                         # Filter 3 filter 1 + filter 2 + SSC
+combustion <- neiT[neiT[,SCC] %in% combuTemp]                      # Filter 4 search filter 3 in table neiT variable "SSC"
+
+# Plot 4
+ggplot(combustion,
+  aes(factor(year),Emissions/10^5)) + # Adjunst scale emissions to 10^5 for correct visualizations
+  theme_light() +
+  facet_grid(.~type,scales = "free",space="free") + 
+  geom_bar(stat="identity",width=0.5, fill="steelblue") +
+  guides(fill="none") +
+  labs(x="year", y=expression("Total PM-Emission")) + 
+  labs(title=expression("Coal Combustion Source Emissions (1999-2008)-")
+  )
+
+# definition  driver graphics copy file png, with dimension size 504
+dev.copy(png,file = "./pics/plot4.png", width=504, height=504)
+
+# clean driver graphics
+dev.off()
+```
+
+### Question 5
+How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
+![Plot 5](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot5.png)
+```R
+```
+### Question 6
+Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"|}fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
+![Plot 6](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot6.png)
+```R
+```
