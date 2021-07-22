@@ -128,7 +128,7 @@ dim(neiT)
 ### Question 1
 Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
 
-![Plot 1](https://github.com/lalamas/rstudio/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot1.png)
+![Plot 1](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot1.png)
 
 ```R
 # Prevents histogram 
