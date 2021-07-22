@@ -9,6 +9,9 @@ ssc_file <- "./data/Source_Classification_Code.rds"
 nei_file <- "./data/summarySCC_PM25.rds"
 zip_file <- "./data/dataFiles.zip"
 
+# select Work Directory
+setwd("./4_Exploratory_Data_Analysis/2-Project")
+
 # view pwd actual
 path <- getwd()
 
@@ -39,3 +42,23 @@ neiT <- data.table::as.data.table(x = readRDS(file = nei_file))
 # neiT -> 6497651 - 6
 dim(sscT)
 dim(neiT)
+
+
+# Prevents histogram from printing in scientific notation
+neiT[, Emissions := lapply(.SD, as.numeric), 
+     .SDcols = c("Emissions")]
+
+totalNei <- neiT[, lapply(.SD, sum, na.rm = TRUE), 
+                 .SDcols = c("Emissions"), by = year]
+
+# definition  driver graphics copy file png, with dimension size 504
+dev.copy(png,file = "./pics/plot1.png", width=504, height=504)
+
+# plot barr
+barplot(totalNei[, Emissions]
+        , names = totalNei[, year]
+        , xlab = "Years", ylab = "Emissions"
+        , main = "Emissions over the Years")
+
+# clean driver graphics
+dev.off()

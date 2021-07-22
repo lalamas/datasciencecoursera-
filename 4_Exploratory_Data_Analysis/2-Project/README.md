@@ -79,7 +79,7 @@ For each plot you should
 -------------------------------------------------------------------------------------------------
 ### Solutions for the questions 
 
-#### Download and Loading Files "Common for all Questions"
+Download and Loading Files "Common for all Question"
 ----------------------------------------------------
 ```R
 # Loadlibrary 
