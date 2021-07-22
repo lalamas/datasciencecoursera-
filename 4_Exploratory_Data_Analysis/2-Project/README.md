@@ -129,50 +129,7 @@ dim(neiT)
 Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
 
 ```R
-# Loadlibrary 
-library("data.table")
-
-# Definition variables for files
-ssc_file <- "./data/Source_Classification_Code.rds"
-nei_file <- "./data/summarySCC_PM25.rds"
-zip_file <- "./data/dataFiles.zip"
-
-# select Work Directory
-setwd("./4_Exploratory_Data_Analysis/2-Project")
-
-# view pwd actual
-path <- getwd()
-
-# Donwload files and save in local directory
-if(!file.exists(nei_file) && !file.exists(ssc_file) ){
-  print("Download file")
-  download.file(url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
-              , destfile = paste(path, "./data/dataFiles.zip", sep = "/"))
-  # unzip files in pwd actual
-  unzip(zipfile=zip_file, exdir="./data")
-
-  #Check its existence fiel zip
-  if (file.exists(zip_file)) {
-      #Delete file if it exists
-      file.remove(zip_file)
-  }
-  
-}else{
-  print("File exists in local")
-}
-
-# Load files in data.table
-sscT <- data.table::as.data.table(x = readRDS(file = ssc_file))
-neiT <- data.table::as.data.table(x = readRDS(file = nei_file))
-
-# Dimension table's
-# sscT -> 11717 - 15
-# neiT -> 6497651 - 6
-dim(sscT)
-dim(neiT)
-
-
-# Prevents histogram from printing in scientific notation
+# Prevents histogram 
 neiT[, Emissions := lapply(.SD, as.numeric), 
      .SDcols = c("Emissions")]
 
