@@ -150,3 +150,28 @@ barplot(totalNei[, Emissions]
 # clean driver graphics
 dev.off()
 ```
+### Question 2
+Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (\color{red}{\verb|fips == "24510"|}fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+![Plot 2](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot2.png)
+```R
+# Prevents histogram 
+neiT[, Emissions := lapply(.SD, as.numeric), 
+     .SDcols = c("Emissions")]
+
+totalNei <- neiT[fips=='24510', lapply(.SD, sum, na.rm = TRUE), 
+                 .SDcols = c("Emissions"), 
+                 by = year]
+
+# definition  driver graphics copy file png, with dimension size 504
+dev.copy(png,file = "./pics/plot2.png", width=504, height=504)
+
+# Plot 2
+barplot(totalNei[, Emissions]
+        , names = totalNEI[, year]
+        , xlab = "Years", ylab = "Emissions"
+        , main = "Emissions over the Years")
+
+# clean driver graphics
+dev.off()
+```
+
