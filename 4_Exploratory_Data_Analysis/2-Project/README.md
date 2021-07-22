@@ -271,4 +271,41 @@ dev.off()
 Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"|}fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
 ![Plot 6](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot6.png)
 ```R
+# Names Variables in table sscT & neiT 
+# sscT -> SCC.Level.Two,  SCC
+# neiT ->  SCC
+
+names(sscT)
+names(neiT)
+
+# Gather the subset of the NEI data which corresponds to vehicles
+vehiSsc <- sscT[grepl("vehicle", sscT$SCC.Level.Two, ignore.case=TRUE), SCC] # Filter 1
+vehiNei <- neiT[neiT[, SCC] %in% vehiSsc,]                                   # Filter 2
+
+# Subset by each city
+# Baltimore
+vehiBalti <- vehiNei[fips == "24510",]
+vehiBalti[, city := c("Baltimore City")]
+# Los Angeles
+vehiLa <- vehiNei[fips == "06037",]
+vehiLa[, city := c("Los Angeles")]
+
+# Combine data.tables 
+bothBaLa <- rbind(vehiBalti,vehiLa)
+
+# Plot 6
+ggplot(bothBaLa,
+       aes(factor(year),Emissions, fill=city)) + 
+  theme_light() +
+  facet_grid(scales = "free",space="free",.~city) + 
+  geom_bar(aes(fill=year),stat="identity",width=0.5, fill="steelblue") +
+  labs(x="year", y=expression("Total Emission - Kilo-Tons")) + 
+  labs(title=expression("-Motor Vehicle Source Emissions in Baltimore (1999-2008)-")
+  )
+
+# definition  driver graphics copy file png, with dimension size 504
+dev.copy(png,file = "./pics/plot6.png", width=504, height=504)
+
+# clean driver graphics
+dev.off()
 ```
