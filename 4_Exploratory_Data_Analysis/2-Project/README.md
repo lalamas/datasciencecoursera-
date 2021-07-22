@@ -175,10 +175,28 @@ barplot(totalNei[, Emissions]
 dev.off()
 ```
 ### Question 3
-Of the four types of sources indicated by the \color{red}{\verb|type|}type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
+Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999–2008 for Baltimore City? Which have seen increases in emissions from 1999–2008? Use the ggplot2 plotting system to make a plot answer this question.
 
 ![Plot 3](https://github.com/lalamas/datasciencecoursera-/blob/main/4_Exploratory_Data_Analysis/2-Project/pics/plot3.png)
 ```R
+# Subset NEI - Baltimore
+baltimore <- neiT[fips=="24510",]
 
+# Plot 3
+ggplot(baltimore,
+  aes(factor(year),Emissions)) + # fill=as.factor(cyl)
+  theme_light() +
+  facet_grid(.~type,scales = "free",space="free") + 
+  geom_bar(stat="identity",width=0.5, fill="steelblue") +
+  guides(fill="none") +
+  labs(x="year", y=expression("Total PM-Emission")) + 
+  labs(title=expression("PM-Emissions-Baltimore City (1999-2008)-")
+)
+
+# definition  driver graphics copy file png, with dimension size 504
+dev.copy(png,file = "./pics/plot3.png", width=504, height=504)
+
+# clean driver graphics
+dev.off()
 ```
 
