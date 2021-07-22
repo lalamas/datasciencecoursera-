@@ -205,7 +205,7 @@ Across the United States, how have emissions from coal combustion-related source
 # Names Variables in table sscT & neiT 
 # ssCT -> SCC.Level.One, SCC.Level.Four, SCC
 # neiT ->  SCC
-names(ssCT)
+names(sscT)
 names(neiT)
 
 # Subset coal combustion 
