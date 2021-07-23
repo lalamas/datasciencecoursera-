@@ -103,8 +103,10 @@ Mean_Steps| Median_Steps
 What is the average daily activity pattern?
 -------------------------------------------
 
-1.- Make a time series plot (i.e.type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
-![](https://github.com/lalamas/datasciencecoursera-/edit/main/5_Reproducible_Research/1.project/Rplot1.png)
+1.- Make a time series plot (i.e.type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).
+
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/Rplot01.png)
+
 ``` r
 # Dfinition date.table interval steps
 interVal <- actiDT[, c(lapply(.SD, mean, na.rm = TRUE)), 
