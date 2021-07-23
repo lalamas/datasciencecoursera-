@@ -58,7 +58,7 @@ For this part of the assignment, you can ignore the missing values in the datase
       research the difference between them. Make a histogram of the total number of steps taken each day
     - Calculate and report the mean and median of the total number of steps taken per day
 
-1. Calculate the total number of steps taken per day
+1.  Calculate the total number of steps taken per day
 
 ``` r
 # Sum Total Steps by date
@@ -77,10 +77,10 @@ Nº |date       |steps
 5: |2012-10-05 |13294
 6: |2012-10-06 |15420
 
-
-1.  If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day.
+2.  If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day.
 
 ![Histogram](https://github.com/lalamas/datasciencecoursera-/edit/main/5_Reproducible_Research/1.project/histogram.png)
+
 ``` r
 # definition driver out "png"
 dev.copy(png,file = "histogram.png", width=204, height=204)
@@ -92,3 +92,14 @@ ggplot(Tot_Steps, aes(x = steps)) +
 # Close driver png
 dev.off()
 ```
+3.  Calculate and report the mean and median of the total number of steps taken per day.
+
+``` r
+# Calculate mean and median steps per day
+Tot_Steps[, .(Mean_Steps = mean(steps, na.rm = TRUE), 
+              Median_Steps = median(steps, na.rm = TRUE))]
+```
+Out:
+Mean_Steps Median_Steps
+----------|------------
+10766.19  |      10765
