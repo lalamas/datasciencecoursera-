@@ -216,10 +216,26 @@ Nº |  steps   |    date| interval| day_week| weekday/weekend
 6: |   NA |2012-11-30     |2355      |Fri         |weekday
 
 
-2. Make a panel plot containing a time series plot (i.e. \color{red}{\verb|type = "l"|}type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
+2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/Rplot3.png)
 
 ``` r
-
+# Filter with median steps
+actiDT[is.na(steps), "steps"] <- actiDT[, c(lapply(.SD, median, na.rm = TRUE)), 
+                                        .SDcols = c("steps")]
+# Filter with mean by weebday/weekend
+interVal <- actiDT[, c(lapply(.SD, mean, na.rm = TRUE)), 
+                   .SDcols = c("steps"), 
+                   by = .(interval, `weekday/weekend`)] 
+# plot
+ggplot(interVal , aes(x=interval , y=steps, color=`weekday/weekend`)) + 
+  geom_line() + 
+  labs(title="Daily Steps Weekday/Weekend", x="Interval", y="No.Steps") + 
+  facet_wrap(~`weekday/weekend`, nrow=2, ncol=1) +
+  theme(
+    plot.title = element_text(color="blue", size=12, face="bold.italic",hjust = 0.5),
+    axis.title.x = element_text(color="black", size=7, face="bold"),
+    axis.title.y = element_text(color="black", size=7, face="bold")
+  )
 ```
-Out ->
