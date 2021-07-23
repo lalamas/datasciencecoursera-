@@ -1,10 +1,9 @@
 # Course Project 1
 
----
-Title: "Reproducible Research Project 1"
-Author: "Alberto Lamas"
-Date: "23/07/2021"
----
+
+- Title: "Reproducible Research Project 1"
+- Author: "Alberto Lamas"
+- Date: "23/07/2021"
 
 
 Introduction
