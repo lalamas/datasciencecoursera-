@@ -79,18 +79,14 @@ Nº |date       |steps
 
 2.  If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day.
 
-![Histogram](https://github.com/lalamas/datasciencecoursera-/edit/main/5_Reproducible_Research/1.project/histogram.png)
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/histogram.png)
 
 ``` r
-# definition driver out "png"
-dev.copy(png,file = "histogram.png", width=204, height=204)
 # Plot
 ggplot(Tot_Steps, aes(x = steps)) +
   theme_light() +
   geom_histogram(fill="steelblue") +
   labs(title = "Histogram - Daily Steps", x = "Steps", y = "Frequency")
-# Close driver png
-dev.off()
 ```
 3.  Calculate and report the mean and median of the total number of steps taken per day.
 
@@ -99,7 +95,83 @@ dev.off()
 Tot_Steps[, .(Mean_Steps = mean(steps, na.rm = TRUE), 
               Median_Steps = median(steps, na.rm = TRUE))]
 ```
-Out:
+Out ->
 Mean_Steps| Median_Steps
 ----------|------------
 10766.19  |      10765
+
+What is the average daily activity pattern?
+-------------------------------------------
+
+1.- Make a time series plot (i.e.type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis).
+
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/Rplot01.png)
+
+``` r
+# Dfinition date.table interval steps
+interVal <- actiDT[, c(lapply(.SD, mean, na.rm = TRUE)), 
+                   .SDcols = c("steps"), by = .(interval)] 
+
+ggplot(interVal, aes(x = interval , y = steps)) + 
+  geom_line(color="steelblue", size=0.4) + 
+  geom_point(color="blue", size = 0.01) +
+  labs(title = "Average Daily Steps", x = "Interval", y = "Avg.Steps/day") +
+  theme(
+    plot.title = element_text(color = "blue",size=12,face="bold.italic",hjust = 1),
+    axis.title.x = element_text(color="black", size=7, face="bold"),
+    axis.title.y = element_text(color="black", size=7, face="bold")
+)
+
+```
+2.- Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+``` r
+# Calculate Max interval activity
+interVal[steps == max(steps), .(max_interval = interval)]
+```
+Out ->
+    max_interval
+         835
+
+Imputing missing values
+-----------------------
+Note that there are a number of days/intervals where there are missing values (coded as \color{red}{\verb|NA|}NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
+1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+``` r
+# Calculate Nº missing values
+actiDT[is.na(steps), .N ]
+```
+Out -> 2304
+2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+``` r
+# Calculate Nº missing values
+actiDT[is.na(steps), .N ]
+```
+3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+``` r
+# Create dataset 
+data.table::fwrite(x = actiDT, file = "data/new_activity.csv", quote = FALSE)
+```
+4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?.
+
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/Rplot2.png)
+
+``` r
+# date.table <- Total Steps by date
+Tot_Steps <- actiDT[, c(lapply(.SD, sum)), 
+                    .SDcols = c("steps"), by = .(date)] 
+
+# Mean/Meaiand of steps/day
+Tot_Steps[, .(Mean_Steps = mean(steps), 
+                Median_Steps = median(steps))]
+# plot 
+ggplot(Tot_Steps, aes(x = steps)) + 
+  geom_histogram(fill = "steelblue",binwidth=600 ) + 
+  labs(title = "Daily Steps", x = "Steps", y = "Frequency")+
+  theme(
+    plot.title = element_text(color = "blue",size=12,face="bold.italic",hjust = 1),
+    axis.title.x = element_text(color="black", size=7, face="bold"),
+    axis.title.y = element_text(color="black", size=7, face="bold")
+  )
+```
+
+
