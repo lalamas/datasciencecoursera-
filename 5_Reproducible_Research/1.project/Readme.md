@@ -79,7 +79,7 @@ Nº |date       |steps
 
 2.  If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day.
 
-![Histogram](https://github.com/lalamas/datasciencecoursera-/edit/main/5_Reproducible_Research/1.project/histogram.png)
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/histogram.png)
 
 ``` r
 # Plot
