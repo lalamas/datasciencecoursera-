@@ -173,5 +173,53 @@ ggplot(Tot_Steps, aes(x = steps)) +
     axis.title.y = element_text(color="black", size=7, face="bold")
   )
 ```
+Median Tot_Steps
+``` r
+# Median 
+mean(Tot_Steps$steps)
+```
+Out -> 9354.23
+
+Median Tot_Steps
+``` r
+# Median 
+median(Tot_Steps$steps)
+```
+Out -> 10395
+
+Are there differences in activity patterns between weekdays and weekends?
+-------------------------------------------------------------------------
+For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
+
+1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+
+``` r
+# Create two variables and filters datas
+actiDT[, date := as.POSIXct(date, format = "%Y-%m-%d")]
+actiDT[, `day_week`:= weekdays(x = date, abbreviate = TRUE)]
+actiDT[grepl(pattern = "Mon|Tue|Wed|Thu|Fri", x = `day_week`), 
+            "weekday/weekend"] <- "weekday"
+actiDT[grepl(pattern = "Sat|Sun", x = `day_week`), 
+            "weekday/weekend"] <- "weekend"
+actiDT[, `weekday/weekend` := as.factor(`weekday/weekend`)]
+
+tail(actiDT)
+```
+Out -> 
+Nº |  steps   |    date| interval| day_week| weekday/weekend
+---|---------|--------|-------|-------|--------  
+1: |   NA |2012-11-30     |2330      |Fri         |weekday
+2: |   NA |2012-11-30     |2335      |Fri         |weekday
+3: |   NA |2012-11-30     |2340      |Fri         |weekday
+4: |   NA |2012-11-30     |2345      |Fri         |weekday
+5: |   NA |2012-11-30     |2350      |Fri         |weekday
+6: |   NA |2012-11-30     |2355      |Fri         |weekday
 
 
+2. Make a panel plot containing a time series plot (i.e. \color{red}{\verb|type = "l"|}type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
+
+
+``` r
+
+```
+Out ->
