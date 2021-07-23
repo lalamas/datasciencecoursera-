@@ -1,6 +1,5 @@
-
 # Course Project 1
-------------------
+
 ---
 Title: "Reproducible Research Project 1"
 Author: "Alberto Lamas"
