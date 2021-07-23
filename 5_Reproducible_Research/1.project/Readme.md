@@ -125,5 +125,9 @@ ggplot(interVal, aes(x = interval , y = steps)) +
 ```
 2.- Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ``` r
-
+# Calculate Max interval activity
+interVal[steps == max(steps), .(max_interval = interval)]
 ```
+Out ->
+    max_interval
+         835
