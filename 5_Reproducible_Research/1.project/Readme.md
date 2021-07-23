@@ -100,6 +100,6 @@ Tot_Steps[, .(Mean_Steps = mean(steps, na.rm = TRUE),
               Median_Steps = median(steps, na.rm = TRUE))]
 ```
 Out:
-Mean_Steps Median_Steps
+Mean_Steps| Median_Steps
 ----------|------------
 10766.19  |      10765
