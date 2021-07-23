@@ -82,15 +82,11 @@ Nº |date       |steps
 ![Histogram](https://github.com/lalamas/datasciencecoursera-/edit/main/5_Reproducible_Research/1.project/histogram.png)
 
 ``` r
-# definition driver out "png"
-dev.copy(png,file = "histogram.png", width=204, height=204)
 # Plot
 ggplot(Tot_Steps, aes(x = steps)) +
   theme_light() +
   geom_histogram(fill="steelblue") +
   labs(title = "Histogram - Daily Steps", x = "Steps", y = "Frequency")
-# Close driver png
-dev.off()
 ```
 3.  Calculate and report the mean and median of the total number of steps taken per day.
 
@@ -99,7 +95,33 @@ dev.off()
 Tot_Steps[, .(Mean_Steps = mean(steps, na.rm = TRUE), 
               Median_Steps = median(steps, na.rm = TRUE))]
 ```
-Out:
+Out ->
 Mean_Steps| Median_Steps
 ----------|------------
 10766.19  |      10765
+
+What is the average daily activity pattern?
+-------------------------------------------
+
+1.- Make a time series plot (i.e.type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+![](https://github.com/lalamas/datasciencecoursera-/edit/main/5_Reproducible_Research/1.project/Rplot1.png)
+``` r
+# Dfinition date.table interval steps
+interVal <- actiDT[, c(lapply(.SD, mean, na.rm = TRUE)), 
+                   .SDcols = c("steps"), by = .(interval)] 
+
+ggplot(interVal, aes(x = interval , y = steps)) + 
+  geom_line(color="steelblue", size=0.4) + 
+  geom_point(color="blue", size = 0.01) +
+  labs(title = "Average Daily Steps", x = "Interval", y = "Avg.Steps/day") +
+  theme(
+    plot.title = element_text(color = "blue",size=12,face="bold.italic",hjust = 1),
+    axis.title.x = element_text(color="black", size=7, face="bold"),
+    axis.title.y = element_text(color="black", size=7, face="bold")
+)
+
+```
+2.- Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+``` r
+
+```
