@@ -1,11 +1,12 @@
----
-title: "Reproducible Research Project 1"
-author: "Alberto Lamas"
-date: "23/07/2021"
----
 
 # Course Project 1
 ------------------
+---
+Title: "Reproducible Research Project 1"
+Author: "Alberto Lamas"
+Date: "23/07/2021"
+---
+
 
 Introduction
 ------------
@@ -71,6 +72,7 @@ head(Tot_Steps)
 ```
 
 Nº |date       |steps
+---|-----------|-----
 1: |2012-10-01 |   NA
 2: |2012-10-02 |  126
 3: |2012-10-03 |11352
