@@ -131,3 +131,47 @@ interVal[steps == max(steps), .(max_interval = interval)]
 Out ->
     max_interval
          835
+
+Imputing missing values
+-----------------------
+Note that there are a number of days/intervals where there are missing values (coded as \color{red}{\verb|NA|}NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
+1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+``` r
+# Calculate Nº missing values
+actiDT[is.na(steps), .N ]
+```
+Out -> 2304
+2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+``` r
+# Calculate Nº missing values
+actiDT[is.na(steps), .N ]
+```
+3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+``` r
+# Create dataset 
+data.table::fwrite(x = actiDT, file = "data/new_activity.csv", quote = FALSE)
+```
+4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?.
+
+![](https://github.com/lalamas/datasciencecoursera-/blob/main/5_Reproducible_Research/1.project/Rplot2.png)
+
+``` r
+# date.table <- Total Steps by date
+Tot_Steps <- actiDT[, c(lapply(.SD, sum)), 
+                    .SDcols = c("steps"), by = .(date)] 
+
+# Mean/Meaiand of steps/day
+Tot_Steps[, .(Mean_Steps = mean(steps), 
+                Median_Steps = median(steps))]
+# plot 
+ggplot(Tot_Steps, aes(x = steps)) + 
+  geom_histogram(fill = "steelblue",binwidth=600 ) + 
+  labs(title = "Daily Steps", x = "Steps", y = "Frequency")+
+  theme(
+    plot.title = element_text(color = "blue",size=12,face="bold.italic",hjust = 1),
+    axis.title.x = element_text(color="black", size=7, face="bold"),
+    axis.title.y = element_text(color="black", size=7, face="bold")
+  )
+```
+
+
