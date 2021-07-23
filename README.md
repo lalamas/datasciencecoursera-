@@ -79,3 +79,14 @@ Nº |date       |steps
 
 
 1.  If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day.
+``` r
+# definition driver out "png"
+dev.copy(png,file = "histogram.png", width=204, height=204)
+# Plot
+ggplot(Tot_Steps, aes(x = steps)) +
+  theme_light() +
+  geom_histogram(fill="steelblue") +
+  labs(title = "Histogram - Daily Steps", x = "Steps", y = "Frequency")
+# Close driver png
+dev.off()
+```
