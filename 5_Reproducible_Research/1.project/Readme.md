@@ -173,5 +173,16 @@ ggplot(Tot_Steps, aes(x = steps)) +
     axis.title.y = element_text(color="black", size=7, face="bold")
   )
 ```
+Median Tot_Steps
+``` r
+# Median 
+mean(Tot_Steps$steps)
+```
+Out -> 9354.23
 
-
+Median Tot_Steps
+``` r
+# Median 
+median(Tot_Steps$steps)
+```
+Out -> 10395
