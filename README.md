@@ -1,7 +1,5 @@
-# Course Project 1
+# Reproducible Research Project 1
 
-
-- Title: "Reproducible Research Project 1"
 - Author: "Alberto Lamas"
 - Date: "23/07/2021"
 
@@ -68,7 +66,7 @@ Tot_Steps <- actiDT[, c(lapply(.SD, sum, na.rm = FALSE)),
 
 head(Tot_Steps)
 ```
-
+Out ->
 Nº |date       |steps
 ---|-----------|-----
 1: |2012-10-01 |   NA
