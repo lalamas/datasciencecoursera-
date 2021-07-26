@@ -1,9 +1,13 @@
 # Author: Alberto Lamas
 # Load library
 library("data.table")
+# define path actual
+path <- getwd()
 
-# select Work Directory
-setwd("./4_Exploratory_Data_Analysis/1.- Project")
+# download and unzip file
+fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(fileUrl, file.path(path, "./data/ficheros.zip"))
+unzip(zipfile = "./data/ficheros.zip")
 
 #Reads in data from file 
 powerT <- data.table::fread(input = "./data/household_power_consumption.txt",
