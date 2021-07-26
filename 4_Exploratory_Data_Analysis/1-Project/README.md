@@ -8,8 +8,13 @@ The four plots that you will need to construct are shown below.
 #Load library
 library("data.table")
 
-# select Work Directory
-setwd("./4_Exploratory_Data_Analysis/1.- Project")
+# define path actual
+path <- getwd()
+
+# download and unzip file
+fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(fileUrl, file.path(path, "./data/ficheros.zip"))
+unzip(zipfile = "./data/ficheros.zip")
 
 #Reads in data from file 
 powerT <- data.table::fread(input = "./data/household_power_consumption.txt")
@@ -58,8 +63,13 @@ dev.off()
 #Load library
 library("data.table")
 
-# select Work Directory
-setwd("./4_Exploratory_Data_Analysis/1.- Project")
+# define path actual
+path <- getwd()
+
+# download and unzip file
+fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(fileUrl, file.path(path, "./data/ficheros.zip"))
+unzip(zipfile = "./data/ficheros.zip")
 
 #Reads in data from file 
 powerT <- data.table::fread(input = "./data/household_power_consumption.txt",
@@ -104,8 +114,13 @@ dev.off()
 # Load library
 library("data.table")
 
-# select Work Directory
-setwd("./4_Exploratory_Data_Analysis/1.- Project")
+# define path actual
+path <- getwd()
+
+# download and unzip file
+fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(fileUrl, file.path(path, "./data/ficheros.zip"))
+unzip(zipfile = "./data/ficheros.zip")
 
 #Reads in data from file 
 powerT <- data.table::fread(input = "./data/household_power_consumption.txt",
@@ -164,8 +179,13 @@ dev.off()
 # Load library
 library("data.table")
 
-# select Work Directory
-setwd("./4_Exploratory_Data_Analysis/1.- Project")
+# define path actual
+path <- getwd()
+
+# download and unzip file
+fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(fileUrl, file.path(path, "./data/ficheros.zip"))
+unzip(zipfile = "./data/ficheros.zip")
 
 #Reads in data from file 
 powerT <- data.table::fread(input = "./data/household_power_consumption.txt",
